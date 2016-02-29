@@ -499,11 +499,6 @@
         var scrollId2;
         var keydownId;
 
-        if($(this).length){
-            init();
-            bindEvents();
-        }
-
         function init(){
             //if css3 is not supported, it will use jQuery animations
             if(options.css3){
@@ -532,10 +527,6 @@
 
             //setting the class for the body element
             setBodyClass();
-
-            $window.on('load', function() {
-                scrollToAnchor();
-            });
         }
 
         function bindEvents(){
@@ -854,6 +845,8 @@
 
             $.isFunction( options.afterLoad ) && options.afterLoad.call(section, section.data('anchor'), (section.index(SECTION_SEL) + 1));
             $.isFunction( options.afterRender ) && options.afterRender.call(container);
+            
+            scrollToAnchor();
         }
 
 
@@ -2705,6 +2698,11 @@
         */
         function showError(type, text){
             console && console[type] && console[type]('fullPage: ' + text);
+        }
+
+        if($(this).length){
+            init();
+            bindEvents();
         }
     };
 
